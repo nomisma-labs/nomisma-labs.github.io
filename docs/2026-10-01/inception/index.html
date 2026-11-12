@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Inception: a place for the workshops">
+  <meta name="theme-color" content="#f6f3ec">
+  <title>Inception: a place for the workshops · Nomisma Labs</title>
+  <link rel="icon" type="image/png" href="/assets/nomisma-coin.png">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header shell">
+    <a class="brand" href="/" aria-label="Nomisma Labs home">
+      <img src="/assets/nomisma-coin.png" width="42" height="42" alt="">
+      <span>NOMISMA <span class="brand-light">LABS</span></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="/">Journal</a>
+      <a href="https://github.com/nomisma-labs">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+  <main id="main" class="article-shell">
+    <a class="back-link" href="/">← All entries</a>
+    <article>
+      <header class="article-header">
+        <p class="eyebrow">Building Nomisma</p>
+        <h1>Inception: a place for the workshops</h1>
+        <div class="entry-meta"><time datetime="2026-10-01">1 October 2026</time><span>2 min read</span></div>
+      </header>
+      <div class="prose"><p>I've created Nomisma Labs on GitHub as a home for reusable trading components and the tools used to develop them. The idea is a group of workshops whose products can be combined into different trading systems. It carries forward the component-based approach from my earlier <a href="https://github.com/iskaspb/trading-platform">trading-platform</a> project.</p>
+<p>Each workshop concentrates on a particular responsibility: configuration, event processing, logging or another part of the system. It owns the component's API, dependencies, tests and release cycle. The workshops collaborate through those interfaces, and their products become building blocks for complete applications.</p>
+<p>The combination depends on the system. An HFT application may need dedicated latency benchmarks and tight control over the market-data and order paths. A mid-frequence trading system may focus on flexible workflows and operational integration. Market connectivity, execution models, risk controls and deployment requirements all affect which components belong together.</p>
+<p>The plan is one component per repository, with a separate trading system repository selecting compatible versions. Git submodules will record dependency revisions, and CMake's FetchContent will integrate the C++ libraries into the build. Shared CMake infrastructure will provide consistent targets, tests and packaging. Components should work both from source and as installed packages, so integration checks need to exercise both forms.</p>
+<p>This structure lets workshops develop independently while making compatibility an explicit responsibility of the system repository. Several systems can share configuration or logging without sharing every execution component, policy or performance requirement.</p>
+<p>I also want a clear boundary between a workshop and its product. The private workshop contains the full development environment: source, experiments, CI/CD, comprehensive tests, internal documentation and tooling. A distributed product contains the code, documentation, tests and build support its users need. Public products will use an open-source licence; distribution terms can be chosen per component or client.</p>
+<p>In terms of included material, <strong>product ≤ workshop</strong>. A release may include some or all of the workshop, and a complete handover can include the development setup too. Internal tooling such as <code>cmake_template</code> can remain entirely within the workshops as non-distributable component.</p>
+<p>I chose GitHub for visibility and collaboration, although I preferred GitLab's CI/CD workflow. Public products give other developers something they can inspect, build and evaluate. That makes open source a practical way to introduce the work and find people who can use or contribute to it.</p>
+<p>The first step is the common CMake template. It will give the workshops a consistent starting point for building, testing and connecting their components.</p>
+</div>
+    </article>
+    <nav class="article-navigation" aria-label="Article navigation">
+<a class="next-entry" href="/2026-10-02/base-repo/" rel="next"><span>Next entry →</span><strong>The first repository: cmake_template</strong></a>    </nav>
+  </main>
+  <footer class="site-footer shell">
+    <span>Nomisma Labs <span class="footer-dot" aria-hidden="true">·</span> Building in the open.</span>
+    <a href="https://github.com/nomisma-labs">Explore the workshops <span aria-hidden="true">↗</span></a>
+  </footer>
+</body>
+</html>

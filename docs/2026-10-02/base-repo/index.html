@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The first repository: cmake_template">
+  <meta name="theme-color" content="#f6f3ec">
+  <title>The first repository: cmake_template · Nomisma Labs</title>
+  <link rel="icon" type="image/png" href="/assets/nomisma-coin.png">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header shell">
+    <a class="brand" href="/" aria-label="Nomisma Labs home">
+      <img src="/assets/nomisma-coin.png" width="42" height="42" alt="">
+      <span>NOMISMA <span class="brand-light">LABS</span></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="/">Journal</a>
+      <a href="https://github.com/nomisma-labs">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+  <main id="main" class="article-shell">
+    <a class="back-link" href="/">← All entries</a>
+    <article>
+      <header class="article-header">
+        <p class="eyebrow">Building Nomisma</p>
+        <h1>The first repository: cmake_template</h1>
+        <div class="entry-meta"><time datetime="2026-10-02">2 October 2026</time><span>2 min read</span></div>
+      </header>
+      <div class="prose"><p>The first repository in Nomisma Labs is <a href="https://github.com/nomisma-labs/cmake_template">cmake_template</a>. Before I start adding trading components, I want a repeatable way to build, test and connect them.</p>
+<p>Configuration, logging and the machinery for connecting components have different jobs, but they share the same basic needs: a build system, tests, dependency handling and a way to be used by another project. Settling those things once makes creating a component a mundane operation. I want to spend my attention on the component's own purpose.</p>
+<p>Nomisma takes the ideas from my earlier <a href="https://github.com/iskaspb/trading-platform">trading-platform</a> project to the next level: componentisation of trading software and commoditisation of the C++ development workflow. Creating a library, adding a test or integrating a dependency should be a familiar, repeatable part of development.</p>
+<p>The cmake_template repo has two jobs. It provides the structure for a new repository, and it gives me a dedicated place to try build system, dependencies and C++ features before other components use them. C++20 modules are the first substantial experiment there.</p>
+<p>Separate repositories also let the shared build infrastructure evolve independently. Each component keeps its own build infrastructure and pinned dependency revisions. New versions of the build system and dependencies can be introduced and tested in the template without automatically changing existing components. Each component adopts an update when it is ready to validate it.</p>
+<p>The template uses the latest C++ standard and stable library versions supported by the toolchain, alongside common CMake helpers and presets for development, release builds, sanitizers and CI. Formatting, naming and licence checks establish shared conventions, with guidance for both developers and coding agents.</p>
+<p>A small example library and application exercise the shared build infrastructure. Unit and integration test coverage helps catch regressions and gives me confidence that components remain usable in other projects as that infrastructure evolves.</p>
+</div>
+    </article>
+    <nav class="article-navigation" aria-label="Article navigation">
+<a href="/2026-10-01/inception/" rel="prev"><span>← Previous entry</span><strong>Inception: a place for the workshops</strong></a><a class="next-entry" href="/"><span>Back to the journal ↑</span><strong>The story so far</strong></a>    </nav>
+  </main>
+  <footer class="site-footer shell">
+    <span>Nomisma Labs <span class="footer-dot" aria-hidden="true">·</span> Building in the open.</span>
+    <a href="https://github.com/nomisma-labs">Explore the workshops <span aria-hidden="true">↗</span></a>
+  </footer>
+</body>
+</html>

@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Inception: a place for the workshops">
+  <meta name="description" content="Inception: a place for the workshops and collaboration">
   <meta name="theme-color" content="#f6f3ec">
-  <title>Inception: a place for the workshops · Nomisma Labs</title>
+  <title>Inception: a place for the workshops and collaboration · Nomisma Labs</title>
   <link rel="icon" type="image/png" href="/assets/nomisma-coin.png">
   <link rel="stylesheet" href="/assets/style.css">
 </head>
@@ -26,18 +26,41 @@
     <article>
       <header class="article-header">
         <p class="eyebrow">Building Nomisma</p>
-        <h1>Inception: a place for the workshops</h1>
-        <div class="entry-meta"><time datetime="2026-10-01">1 October 2026</time><span>2 min read</span></div>
+        <h1>Inception: a place for the workshops and collaboration</h1>
+        <div class="entry-meta"><time datetime="2026-10-01">1 October 2026</time><span>5 min read</span></div>
       </header>
-      <div class="prose"><p>I've created Nomisma Labs on GitHub as a home for reusable trading components and the tools used to develop them. The idea is a group of workshops whose products can be combined into different trading systems. It carries forward the component-based approach from my earlier <a href="https://github.com/iskaspb/trading-platform">trading-platform</a> project.</p>
-<p>Each workshop concentrates on a particular responsibility: configuration, event processing, logging or another part of the system. It owns the component's API, dependencies, tests and release cycle. The workshops collaborate through those interfaces, and their products become building blocks for complete applications.</p>
-<p>The combination depends on the system. An HFT application may need dedicated latency benchmarks and tight control over the market-data and order paths. A mid-frequence trading system may focus on flexible workflows and operational integration. Market connectivity, execution models, risk controls and deployment requirements all affect which components belong together.</p>
-<p>The plan is one component per repository, with a separate trading system repository selecting compatible versions. Git submodules will record dependency revisions, and CMake's FetchContent will integrate the C++ libraries into the build. Shared CMake infrastructure will provide consistent targets, tests and packaging. Components should work both from source and as installed packages, so integration checks need to exercise both forms.</p>
-<p>This structure lets workshops develop independently while making compatibility an explicit responsibility of the system repository. Several systems can share configuration or logging without sharing every execution component, policy or performance requirement.</p>
-<p>I also want a clear boundary between a workshop and its product. The private workshop contains the full development environment: source, experiments, CI/CD, comprehensive tests, internal documentation and tooling. A distributed product contains the code, documentation, tests and build support its users need. Public products will use an open-source licence; distribution terms can be chosen per component or client.</p>
-<p>In terms of included material, <strong>product ≤ workshop</strong>. A release may include some or all of the workshop, and a complete handover can include the development setup too. Internal tooling such as <code>cmake_template</code> can remain entirely within the workshops as non-distributable component.</p>
-<p>I chose GitHub for visibility and collaboration, although I preferred GitLab's CI/CD workflow. Public products give other developers something they can inspect, build and evaluate. That makes open source a practical way to introduce the work and find people who can use or contribute to it.</p>
-<p>The first step is the common CMake template. It will give the workshops a consistent starting point for building, testing and connecting their components.</p>
+      <div class="prose"><p>I've created Nomisma Labs on GitHub as a home for reusable trading components and the tools used to develop them. I'm taking the component-based approach from my earlier <a href="https://github.com/iskaspb/trading-platform">trading-platform</a> project a step further by organizing development into workshops. Their products can be combined to build different kinds of trading systems.</p>
+<p>Each workshop develops a component with a specific responsibility, such as configuration, event processing, logging or communication. The workshop owns that component's implementation, API, dependencies, tests, documentation and release cycle. The workshops collaborate, and their products become building blocks for complete applications.</p>
+<p>A high-frequency trading (HFT) application may need dedicated latency benchmarks and tight control over its market-data and execution paths. A mid-frequency trading system may focus on flexible workflows and operational integration. Market connectivity, execution models, risk controls and deployment requirements also affect which components belong together.</p>
+<p>A Git repository serves as a container for a component or a workshop. Git submodules will record dependency revisions, and the build system will integrate the C++ libraries. The workshops will share a CMake-based toolchain for consistent targets, tests and packaging.</p>
+<p>I also want a clear boundary between a workshop and its product. The workshop contains the full development environment, including source code, experiments, CI/CD, comprehensive tests, documentation and tooling. The distributed product gives its users the code, user documentation, tests and build support they need. Public products will use an open-source licence. Distribution terms can be chosen separately for each component.</p>
+<p>In many cases, &quot;Git repo&quot;, &quot;component&quot;, &quot;product&quot; and &quot;workshop&quot; refer to the same thing, so the terms can be used interchangeably. Each term still has a distinct meaning.</p>
+<ul>
+<li>A component is a software entity whose API defines its functional boundaries.</li>
+<li>A product is a released component ready for distribution and use by its clients.</li>
+<li>A workshop is a development environment for creating and releasing a component or a system.</li>
+<li>A Git repo is a container for the source code of a component, a workshop or both.</li>
+</ul>
+<p>Here's how they fit together.</p>
+<ul>
+<li>For component development, each workshop contains a single component and produces one or more releases. Each release is a distinct version of the product.</li>
+<li>A product can be distributed as versioned component source code, optionally with a build system and documentation. Packaged forms include executable binaries, Python modules and Docker containers.</li>
+<li>For now, <strong>a workshop and its Git repo are one and the same</strong> because the toolchain is tightly coupled to the component's source code. I plan to separate the toolchain from the component later.</li>
+<li>Git is used to tag each version of a component, and Git submodules are used to record the components it depends on and their exact revisions.</li>
+</ul>
+<p><img src="/2026-10-01/inception/diagram-1.svg" alt="Workshop A uses its build toolchain to build Component A. The component includes source and documentation. Tests and tools support its development. A Git submodule pins a commit in Component B&#x27;s repo. The v1.0.0 release of A can be distributed as versioned source or as a package."></p>
+<h2>Explanatory notes (optional)</h2>
+<h3>Why not a monorepo?</h3>
+<p>I find a monorepo works best when one team develops one product on a single release cycle. In that setting, one repo keeps operational overhead low. In trading system development, research, trading, platform development and infrastructure work are only loosely coupled. They require different skills, and a change that's urgent for one group may have little bearing on another group's release schedule.</p>
+<p>Imagine optimization work taking place in parallel with the introduction of a new market to the trading platform. Even with careful use of Git branches, the two changes cancel each other out and lead to unmanageable conflicts. Trading strategy logic is also typically kept separate from platform development because traders prefer not to share their secrets.</p>
+<h3>Why a &quot;workshop&quot; model?</h3>
+<p>This is an attempt to marry different styles of software development in a single project. Consider the differences between proprietary software development within one organization, off-the-shelf software and open-source projects. They assume different levels of collaboration, openness and responsibility.</p>
+<p>For instance, an open-source repo usually contains everything related to the project, including the source code, build system, docs, tests and tooling. When you buy a video game, you get only a downloadable package containing a prebuilt binary and the resources required to run the game on your platform. The package doesn't include a game location editor.</p>
+<p>The focus of Nomisma Labs is trading platform development, but what kind of trading platform? Crypto, capital markets or FX? HFT or MFT? These are only the most obvious differences. Some parts of a trading platform are meant to be public, some are strictly private and some are hybrid.</p>
+<h3>What about development for multiple platforms, C++ versions or languages?</h3>
+<p>This isn't supported for economic reasons. It's possible to cover all these differences with multiple toolchains, support for multiple build systems and a carefully designed C++ abstraction layer that lets you write code for a range of C++ compilers and standards. Boost is one of many examples. Yes, it's possible, but it's costly. The workshop model still leaves people free to create their own workshops with their own compatibility requirements.</p>
+<h3>Why a single toolchain?</h3>
+<p>This is a specific case of the previous question. The difference here is that the current code structure doesn't allow the component source to be separated from the toolchain. The reason is still the cost. I plan to change this by drawing a clear boundary between the toolchain and the component.</p>
 </div>
     </article>
     <nav class="article-navigation" aria-label="Article navigation">

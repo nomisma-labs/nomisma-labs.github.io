@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Packaging and distribution">
+  <meta name="theme-color" content="#f6f3ec">
+  <title>Packaging and distribution · Nomisma Labs</title>
+  <link rel="icon" type="image/png" href="/assets/nomisma-coin.png">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header shell">
+    <a class="brand" href="/" aria-label="Nomisma Labs home">
+      <img src="/assets/nomisma-coin.png" width="42" height="42" alt="">
+      <span>NOMISMA <span class="brand-light">LABS</span></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="/">Journal</a>
+      <a href="https://github.com/nomisma-labs">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+  <main id="main" class="article-shell">
+    <a class="back-link" href="/">← All entries</a>
+    <article>
+      <header class="article-header">
+        <p class="eyebrow">Building Nomisma</p>
+        <h1>Packaging and distribution</h1>
+        <div class="entry-meta"><time datetime="2026-10-05">5 October 2026</time><span>2 min read</span></div>
+      </header>
+      <div class="prose"><p>It might be too early to talk about distribution at the very beginning of the project. Still, the question of how to deliver the product is too important to put off because it affects many development decisions.</p>
+<p>For instance, the trading platform might be distributed as a prebuilt library with C++ headers, shared objects and API docs, perhaps packaged in the formats used by popular OS distributions. In that case, I need to think about what the API should be, which platforms to support and how to organize CI/CD for multiple builds and packages, even if I target only one platform at first. Those are questions any mature product development team should have answers to. Nomisma Labs, however, is still new.</p>
+<p>Here are the principles I'm following at this stage.</p>
+<ol>
+<li>
+<p>Core platform development is the priority.</p>
+<p>Putting the platform to use and deciding how to deploy the applications built on it are secondary goals.</p>
+</li>
+<li>
+<p>The API of every component should be clear.</p>
+<p>Even if the package boundary is not yet well defined, the API shows where that boundary should be.</p>
+</li>
+</ol>
+<p>Distribution targets users at two opposite ends of the spectrum.</p>
+<ul>
+<li>A core platform developer.</li>
+<li>A trader with no programming experience, armed with AI.</li>
+</ul>
+<p>Other cases will be covered later or as needed.</p>
+<p>This gives me two packaging options.</p>
+<ol>
+<li>Source code distribution. Every component is licensed as &quot;open source&quot; or &quot;source available&quot; and is accessible via GitHub.</li>
+<li>Some components will be built as Python wheels so users can simply import the Python module.</li>
+</ol>
+<p>All supporting build and packaging tooling will be part of the <a href="https://github.com/nomisma-labs/cmake_template">cmake_template</a> toolchain.</p>
+</div>
+    </article>
+    <nav class="article-navigation" aria-label="Article navigation">
+<a href="/2026-10-02/first-repo/" rel="prev"><span>← Previous entry</span><strong>The first repository: cmake_template</strong></a><a class="next-entry" href="/"><span>Back to the journal ↑</span><strong>The story so far</strong></a>    </nav>
+  </main>
+  <footer class="site-footer shell">
+    <span>Nomisma Labs <span class="footer-dot" aria-hidden="true">·</span> Building in the open.</span>
+    <a href="https://github.com/nomisma-labs">Explore the workshops <span aria-hidden="true">↗</span></a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Integration framework: Assembly/Relay">
+  <meta name="theme-color" content="#f6f3ec">
+  <title>Integration framework: Assembly/Relay · Nomisma Labs</title>
+  <link rel="icon" type="image/png" href="/assets/nomisma-coin.png">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header shell">
+    <a class="brand" href="/" aria-label="Nomisma Labs home">
+      <img src="/assets/nomisma-coin.png" width="42" height="42" alt="">
+      <span>NOMISMA <span class="brand-light">LABS</span></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="/">Journal</a>
+      <a href="https://github.com/nomisma-labs">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+  <main id="main" class="article-shell">
+    <a class="back-link" href="/">← All entries</a>
+    <article>
+      <header class="article-header">
+        <p class="eyebrow">Building Nomisma</p>
+        <h1>Integration framework: Assembly/Relay</h1>
+        <div class="entry-meta"><time datetime="2026-10-03">3 October 2026</time><span>2 min read</span></div>
+      </header>
+      <div class="prose"><p><a href="https://github.com/nomisma-labs/assembly">Assembly/Relay</a> is an integration framework for describing synchronous workflows. It brings components together and makes their context and event connections explicit.</p>
+<p>The framework has three key concepts:</p>
+<ul>
+<li><strong>Assembly</strong> is a collaborative group of components, each with its own responsibility and access to the context it needs. Components contribute state and services to the assembly's shared context.</li>
+<li><strong>Relay</strong> adds a bidirectional pipe topology and synchronous event connections between components. Requests travel forwards and responses backwards, with each handler controlling further propagation.</li>
+<li><strong>Delegate</strong> provides typed callback interfaces for connecting components outside the Assembly/Relay ecosystem, including adapters that bring external events into a workflow.</li>
+</ul>
+<p>The <a href="https://github.com/nomisma-labs/assembly/tree/master/tests">test suite</a> provides a first introduction to using the framework. Later, actual production components will show how these ideas work in practice.</p>
+<p>The implementation comes from my earlier <a href="https://github.com/iskaspb/trading-platform">trading-platform</a> project. The ideas draw on my experience at <a href="https://laplace.digital/">Laplace Research</a> and, before that, on work across various financial IT systems.</p>
+<p>I see the framework's conceptual grandfather in the <a href="https://martinfowler.com/eaaCatalog/transactionScript.html">Transaction Script pattern</a>, described by Martin Fowler in <a href="https://martinfowler.com/books/eaa.html">Patterns of Enterprise Application Architecture</a>. It organises the business logic for a request as a linear workflow consisting of mid-sized building blocks. Assembly/Relay develops that idea through collaborating components, explicit context and synchronous event flow.</p>
+<p>I'll explore these ideas further in upcoming notes:</p>
+<ol>
+<li><strong>Assembly/Relay: foundation for “trust-less” software architecture</strong></li>
+<li><strong>Assembly/Relay: “zero-cost” integration</strong></li>
+<li><strong>Assembly/Relay: the importance of context</strong></li>
+<li><strong>Assembly/Relay: beyond flat topology</strong></li>
+<li><strong>Assembly/Relay and Config: common application language</strong></li>
+</ol>
+</div>
+    </article>
+    <nav class="article-navigation" aria-label="Article navigation">
+<a href="/2026-10-02/first-repo/" rel="prev"><span>← Previous entry</span><strong>The first repository: cmake_template</strong></a><a class="next-entry" href="/2026-10-05/packaging/" rel="next"><span>Next entry →</span><strong>Packaging and distribution</strong></a>    </nav>
+  </main>
+  <footer class="site-footer shell">
+    <span>Nomisma Labs <span class="footer-dot" aria-hidden="true">·</span> Building in the open.</span>
+    <a href="https://github.com/nomisma-labs">Explore the workshops <span aria-hidden="true">↗</span></a>
+  </footer>
+</body>
+</html>
